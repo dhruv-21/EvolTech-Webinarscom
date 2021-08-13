@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Webcam Test</title>
+
+    <style>
+         body{
+        
+            width: 900px;
+            margin-left: 200px;
+            height: 500px;
+          margin: 60px;
+            box-shadow: 20px 20px 50px rgb(0, 0, 0, 0.4);
+            border-radius: 15px;
+            background: rgba(0, 0, 0, 0.822);
+            overflow: hidden;
+            display: flex;
+text-align: center;
+            backdrop-filter: blur(6px);
+            font-family: Rockwell;
+    }
+    
+.sub{
+       
+            box-shadow: 20px 20px 50px rgb(0, 0, 0, 0.4);
+            border-radius: 15px;
+            background: rgba(0, 0, 0, 0);
+            overflow: hidden;
+                   margin-top: 100px;
+          width: 100%;
+            backdrop-filter: blur(6px);
+          
+
+            box-shadow: 20px 20px 50px rgb(0, 0, 0, 0.4);
+            border-radius: 15px;
+        
+            overflow: hidden;
+         
+            font-size: 40px;
+          margin: 60px;
+            backdrop-filter: blur(6px);
+            font-family: monospace;
+            color: rgb(255, 255, 255);
+    }
+    a{
+        box-shadow: 20px 20px 50px rgb(0, 0, 0, 0.4);
+          margin-left: 100px;
+
+           color: rgb(255, 255, 255);
+            overflow: hidden;
+         border-radius: 100px;
+            font-size: 30px;
+            text-decoration: none;
+width: 20px;
+text-align: center;
+          border: 20px solid rgb(255, 0, 64) ;
+            backdrop-filter: blur(6px);
+            font-family: Rockwell;
+            background-color: rgb(255, 0, 64);
+    }
+    
+        #placement {
+            margin: 0px auto;
+            width: 500px;
+            height: 400px;
+            border: 10px rgb(255, 255, 255) solid;
+        }
+
+        #loading {
+            width: 500px;
+            height: 400px;
+            background-color: rgb(0, 0, 0);
+        }
+    </style>
+</head>
+
+<body>
+<a href="erc.html">!</a>
+    <div id="placement">
+        <video autoplay="true" id="loading">
+
+        </video>
+        <p>See if your Webcam is set up properly.. <br>
+            Make sure you click on allow</p>
+            <p>Don't worry It's safe you are only allowing it for yourself.</p>
+    </div>
+    
+    <script>
+    var video = document.querySelector("#loading");
+
+    if (navigator.mediaDevices.getUserMedia) {
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(function (stream) {
+                video.srcObject = stream;
+            })
+            .catch(function (err0r) {
+                console.log("Something went wrong!");
+            });
+    }
+    var video = document.querySelector("#loading");
+    if (navigator.mediaDevices.getUserMedia) {
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(function (stream) {
+                    video.srcObject = stream;
+                })
+                .catch(function (err0r) {
+                    console.log("Error, Something went wrong!");
+                });
+        }
+          var stream = video.srcObject;
+            var tracks = stream.getTracks();
+
+            for (var i = 0; i < tracks.length; i++) {
+                var track = tracks[i];
+                track.stop();
+            }
+
+            video.srcObject = null;
+
+    </script>
+</body>
+
+</html

@@ -1,0 +1,151 @@
+<!-- index.html -->
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Magic App</title>
+    <meta name="description" content="Magic App">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="index.css">
+</head>
+<style>
+    body{
+        
+            width: 900px;
+            margin-left: 200px;
+            height: 500px;
+          margin: 60px;
+            box-shadow: 20px 20px 50px rgb(0, 0, 0, 0.4);
+            border-radius: 15px;
+            background: rgba(0, 0, 0, 0.822);
+            overflow: hidden;
+            display: flex;
+text-align: center;
+            backdrop-filter: blur(6px);
+            font-family: Rockwell;
+    }
+    .sub{
+       
+            box-shadow: 20px 20px 50px rgb(0, 0, 0, 0.4);
+            border-radius: 15px;
+            background: rgba(0, 0, 0, 0);
+            overflow: hidden;
+                   margin-top: 100px;
+          width: 100%;
+            backdrop-filter: blur(6px);
+          
+
+            box-shadow: 20px 20px 50px rgb(0, 0, 0, 0.4);
+            border-radius: 15px;
+        
+            overflow: hidden;
+         
+            font-size: 40px;
+          margin: 60px;
+            backdrop-filter: blur(6px);
+            font-family: monospace;
+            color: rgb(255, 255, 255);
+    }
+    a{
+        box-shadow: 20px 20px 50px rgb(0, 0, 0, 0.4);
+          margin-left: 100px;
+
+           color: rgb(255, 255, 255);
+            overflow: hidden;
+         border-radius: 100px;
+            font-size: 30px;
+            text-decoration: none;
+width: 60px;
+          border: 40px solid rgb(255, 0, 64) ;
+            backdrop-filter: blur(6px);
+            font-family: Rockwell;
+            background-color: rgb(255, 0, 64);
+    }
+    
+</style>
+<body>
+    <h2>Click>Allow</h2>
+<section>
+<div id="main">
+
+    <span class="server"></span>
+</div>
+</div>
+<div id="location" class="sub">
+    <h2></h2>
+   <h1>MY CURRENT📍</h1>
+    <div class="address"></div>
+</div>
+</section>
+   
+
+    <br>
+  
+<script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+            var address = document.querySelector('.address')
+            if (!navigator.geolocation) {
+                console.log("Geolocation is not supported by your browser");
+                ipLookup();
+            } else {
+                navigator.geolocation.getCurrentPosition(success, error);
+            }
+
+            function success(position) {
+                var latitude = position.coords.latitude;
+                var longitude = position.coords.longitude;
+                reverseGeocodingWithGoogle(longitude, latitude)
+            }
+            function error() {
+                console.log("Unable to retrieve your location");
+            }
+            function ipLookup() {
+                fetch('https://extreme-ip-lookup.com/json/')
+                    .then(res => res.json())
+                    .then(response => {
+                        fallbackProcess(response)
+                    })
+                    .catch((data, status) => {
+                        address.innerText = 'We could not find your location'
+                    })
+            }
+
+            function reverseGeocodingWithGoogle(latitude, longitude) {
+                fetch(`https://maps.googleapis.com/maps/api/geocode/json?
+      latlng=${latitude},${longitude}&key={GOOGLE_MAP_KEY}`)
+                    .then(res => res.json())
+                    .then(response => {
+                        processUserData(response)
+                    })
+                    .catch(status => {
+                        ipLookup()
+                    })
+            }
+
+            function processUserData(response) {
+                address.innerText = response.results[0].formatted_address
+            }
+
+            function fallbackProcess(response) {
+                address.innerText = `${response.city}, ${response.country}`
+            }
+
+            var localTime = jstz.determine().name();
+            var serverTime = "Asia/Novosibirsk";
+            document.querySelector('.server').innerText = new Date().toLocaleString("en-US", { timeZone: serverTime });
+            document.querySelector('.local').innerText = new Date().toLocaleString("en-US", { timeZone: localTime });
+                 new Date().toLocaleString("en-US", { timeZone: "TIMEZONE_STRING_HERE" })
+        });
+   
+</script>
+<map name="">
+<a href="erc.html">!</a>
+<br></br>
+<p>Don't worry It's safe to allow you are only allowing it for yourself.</p>
+<div id="location" class="sub"></div>
+</map>
+</body>
+
+</html>
